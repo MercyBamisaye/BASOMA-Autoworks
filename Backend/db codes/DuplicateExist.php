@@ -33,6 +33,22 @@ class DuplicateExist{
         }
 
     }
+    public static function exists_($email, $table){
+        // Query the Database
+        $sql = "SELECT * FROM `$table` WHERE `user_id`='$email'";
+
+        global $connect;
+        $result = $connect -> query($sql);
+
+        if ($result->num_rows > 0) {
+            //return $result->fetch_all(MYSQLI_ASSOC);
+            return true; // Returns true if the email already exists.
+        }
+        else{
+            return false;// Returns false if the email does not exists.
+        }
+
+    }
 
 }
 ?>

@@ -14,12 +14,12 @@ class UpdateData{
     /**
      * This method helps to update the status of the products
      * within the cart table in the database.
-     * @param mixed $carts 
+     * @param mixed $carts
      */
     public function cart($carts){
         var_dump($carts);
         foreach($carts as $cart){
-            
+
             $sql = "UPDATE `cart` SET `status` = '1' WHERE (`id` = '$cart')";
 
 
@@ -27,6 +27,19 @@ class UpdateData{
             $result = $connect -> query($sql);
 
         }
+    }
+
+
+    public function user($userDetails){
+        $fName = $userDetails["firstName"];
+        $lName = $userDetails["lastName"];
+        $id = $userDetails["userId"];
+
+        $sql = "UPDATE `user` SET `firstName` = '$fName', `lastName` = '$lName' WHERE (`id` = '$id')";
+
+        global $connect;
+        $result = $connect -> query($sql);
+
     }
 }
 ?>

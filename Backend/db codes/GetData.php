@@ -82,6 +82,26 @@ class GetData{
 
     }
 
+    public function user_($userDetails){
+        $this->email = $userDetails['email'];
+        $this->password= $userDetails['password'];
+
+        // Query the Database
+        $sql = "SELECT * FROM `user` WHERE `username`='$this->email' AND `password`='$this->password'";
+
+        global $connect;
+        $result = $connect -> query($sql);
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();// Returns details if user exists.
+            //return $result->fetch_all(MYSQLI_ASSOC);
+        }
+        else{
+            return null;// Returns null if the user does not exists.
+        }
+
+    }
+
     public function ImgId($image_1){
         // Query the Database
         $sql = "SELECT id FROM `image` WHERE image_1='$image_1'";
