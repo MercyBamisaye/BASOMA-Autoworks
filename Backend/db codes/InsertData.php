@@ -6,7 +6,7 @@ require_once "./db codes/DBConnector.php";
 $connect = DBConnector::connectToDB();
 
 class InsertData{
-    private string $nin, $fName,$lName,$email,$phoneNumber,$password,$pAddress,$cAddress;
+    private string $sName,$email,$phoneNumber,$password;
 
     /**
      * The below method helps to send New User's informations
@@ -17,16 +17,12 @@ class InsertData{
      * @return mixed
      */
     public function user($userDetails){
-        $this->fName = $userDetails['fName'];
-        $this->lName = $userDetails['lName'];
+        $this->sName = $userDetails['username'];
         $this->email = $userDetails['email'];
         $this->password= $userDetails['password'];
-        $this->nin = $userDetails['nin'];
         $this->phoneNumber = $userDetails['phoneNumber'];
-        $this->pAddress = $userDetails['pAddress'];
-        $this->cAddress = $userDetails['cAddress'];
 
-        $sql = "INSERT INTO `user` (`id`,`nin`,`fname`,`lname`,`phone_no`,`permt_address`,`cont_address`,`password`,`email`) VALUES(NULL,'$this->nin','$this->fName','$this->lName','$this->phoneNumber','$this->pAddress','$this->cAddress','$this->password','$this->email')";
+        $sql = "INSERT INTO `user` (`id`,`username`,`email`,`phoneNumber`,`password`) VALUES(NULL,'$this->sName','$this->email','$this->phoneNumber','$this->password')";
 
         global $connect;
 

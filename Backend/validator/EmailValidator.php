@@ -11,7 +11,7 @@ class EmailValidator extends Validator{
                     return parent::validate($userDetails);
                 }
                 else{
-                    return "Please input a valid email";
+                    return "Maximum characters expected for Email is Fifty(50).";
                 }
             }
             else{
