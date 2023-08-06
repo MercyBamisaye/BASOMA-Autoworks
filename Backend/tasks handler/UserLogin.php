@@ -20,36 +20,35 @@ class UserLogin{
 
         foreach($userDetails as $key=>$value){
 
-            $enc = new Encryption($value);
-            if($key == "password"){
-                $this->userDetails[$key] = $enc->getBBWiSEEncrypt();
-            }
-            else{
-                $this->userDetails[$key] = $enc->getAESEncrypt();
-            }
+            $enc = new Encryption();
+            $this->userDetails[$key] = $enc->getAESEncrypt($value);
+
         }
 
         $getData = new GetData();
-        $userInfo = $getData->user($this->userDetails);
+        $userInfo1 = $getData->user($this->userDetails);
+        $userInfo2 = $getData->user_($this->userDetails);
+        $userInfo = [];
 
-        //var_dump($userInfo);
+        if($userInfo1 != null){
+            $userInfo = $userInfo1;
+        }
+        else{
+            $userInfo = $userInfo2;
+        }
         if($userInfo != null){
-            $enc = new Encryption(" ");
+            $enc = new Encryption();
             foreach($userInfo as $key=>$value){
+                if($key == 'id'){$this->decryptedUserInfo[$key] =$value;continue;}
+                if($value ==null){continue;}
 
-                if($key == "password"){
-                    continue;
-                }
-                elseif($key=="id"){
-                    $this->decryptedUserInfo[$key] = $value;
-                }
-                else{
-                    $this->decryptedUserInfo[$key] = $enc->getAESDecrypt($value);
-                }
+                $this->decryptedUserInfo[$key] = $enc->getAESDecrypt($value);
+
             }
             return $this->decryptedUserInfo;
         }
         else{
+
             unset($_POST);
             return null;
         }
