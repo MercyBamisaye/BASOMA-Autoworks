@@ -1,10 +1,14 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Website</title>
-    <link rel="stylesheet" href="LandingPage.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <div class="header">
@@ -30,6 +34,10 @@
             <i class="fas fa-shopping-cart"></i>
             <i class="fas fa-heart"></i>
             <i class="fas fa-user"></i>
+            <strong> <?php if(isset($_SESSION['USERNAME'])){
+                               echo $_SESSION['USERNAME']."  <a href=\"Login.php\" style=\"color: black; text-decoration: none;\"><strong>Logout</strong></a>";
+                           } else{ echo "<a href=\"Login.php\" style=\"color: black; text-decoration: none;\"><strong>Login</strong></a>";} ?></strong>
+            
         </div>
     </div>
 
@@ -40,7 +48,12 @@
             <h3>Get amazing deals on used and brand new cars</h3>
             <div class="buttons">
                 <button>Buy Now</button>
-                <button>Become a Seller</button>
+                <?php
+                if(isset($_SESSION['UPDATED']) && $_SESSION['UPDATED']== true){}
+                else{
+                ?>
+                <button onclick="redirectTo()">Become a Seller</button><?php }
+                ?>
             </div>
         </div>
         <div class="images">
@@ -146,7 +159,7 @@
             </div>
         </div>
     </div>
-    <script src="scripts.js"></script>
+    <script src="index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
 </body>
 </html>
