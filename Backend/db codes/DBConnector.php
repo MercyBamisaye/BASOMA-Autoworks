@@ -4,7 +4,7 @@
 
 class DBConnector{
   public static function connectToDB(){
-      return new mysqli("localhost","root","B.blessing2","basoma_autoworks");
+      return new mysqli("localhost","root","","basoma_autoworks");
   }
 }
 
