@@ -45,7 +45,7 @@ class InsertData{
      * @return mixed
      */
     public function business($businessDetails){
-        $businessName = $businessDetails['username'];
+        $businessName = $businessDetails['businessName'];
         $businessEmail = $businessDetails['email'];
         $businessPhoneNumber = $businessDetails['phoneNumber'];
         $businessAddress = $businessDetails['businessAddress'];

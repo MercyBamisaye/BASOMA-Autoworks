@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!(isset($_SESSION['USERNAME']))){
+    header("location: Login.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +17,8 @@
     <div class="registration-container">
         <p class="registration-title">LET'S GET YOU STARTED AS A SELLER</p>
         <h1 class="create-account">Create an Account</h1>
-        <form class="registration-form" onsubmit="return false;">
+        <strong style="color:red"><?PHP if(isset($_SESSION['SELLER_REG_ERROR'])){$_SESSION['SELLER_REG_ERROR'];unset($_SESSION['SELLER_REG_ERROR']);}?></strong>
+        <form class="registration-form" action="Backend/sellerRegistrationProcessor.php" method="get">
             <label for="firstName">First Name:</label>
             <input type="text" id="firstName" name="firstName" required>
 
@@ -18,21 +26,18 @@
             <input type="text" id="lastName" name="lastName" required>
 
             <label for="Business Name">Business Name:</label>
-            <input type="text" id="Business Name" name="Business Name" required>
+            <input type="text" id="Business Name" name="BusinessName" required>
 
-            <label for="email">Email:</label>
+            <label for="email">Business Email:</label>
             <input type="email" id="email" name="email" required>
 
-            <label for="Phone No">Phone No:</label>
+            <label for="Phone No">Business Phone No:</label>
             <input type="text" id="Phone No" name="Phone" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="address">Business Address:</label>
+            <input type="text" id="password" name="address" required>
 
-            <label for="Confirm Password">Confirm Password:</label>
-            <input type="Password" id="Confirm Password" name="Confirm Password" required>
-
-            <button type="submit" class="get-started-button" onclick="getStarted()">GET STARTED</button>
+            <button type="submit" class="get-started-button">GET STARTED</button>
         </form>
         <h3 class="or-sign-up">Or Sign Up With</h3>
         <div class="social-login-options">
@@ -40,7 +45,7 @@
             <button class="social-login-button facebook" onclick="redirectTo('https://www.facebook.com')">Facebook</button>
             <button class="social-login-button apple" onclick="redirectTo('https://www.apple.com')">Apple</button>
         </div>
-        <p class="login-here">Already have an account? <a href="#" class="login-link">LOGIN HERE</a></p>
+        <p class="login-here">Already have an account? <a href="Login.php" class="login-link">LOGIN HERE</a></p>
     </div>
 
     <script src="script.js"></script>
